@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>LabSupplies</title>
+		<link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3 style="color: #91C8F6;">SAP CAP Project Presentation</h3>
+					<h5 style="margin-bottom: 100px;">LabSupplies</h5>
+					<p><small>Prepared By <a href="https://github.com/DashaErmolich" target="_blank">Dasha Ermolich</a></small></p>
+					<p><small>October 2023</small></p>
+
+					<aside class="notes">
+						Hi everyone, my name is Dasha and today I want to show you SAP CAP project presentation - Labsupplies application
+					</aside>
+				</section>
+				<section>
+					<h2>Tools</h2>
+				</section>
+				<section>
+						<ul>
+							<li>SAP BTP</li>
+							<li>SAP CAP</ul>
+							<li>SAP HANA Cloud</li>
+							<li>Cloud Identity Services</li>
+							<li>SAP Fiori Elements</li>
+							<li>SAP Flexible Programming Model</li>
+							<li>Adobe PDF Services</li>
+						</ul>
+						<aside class="notes">
+							I used several tools to build this application, of course I use SAP BTP, SAP CAP and SAP HANA CLOUD with 
+							another SAP services, SAP Fiori Element, additioanal services like ADOBE PDF SERVICE
+						</aside>
+				</section>
+				<section>
+					<h5>SAP Build Apps</h5>
+					<img src="buildApps.png" alt="" width="500px">
+					<aside class="notes">
+						SAP Build Apps for mobile QRCODE scanner application
+					</aside>
+				</section>
+				<section>
+					<h5>SAP Build Work Zone</h5>
+					<img src="./flp2.png" alt="" width="500px">
+					<aside class="notes">
+						and SAP Build Work Zone as the single entry point to app
+					</aside>
+				</section>
+				<section>
+					<h2>App Features</h2>
+				</section>
+				<section>
+					<h5>Authentication via social media</h5>
+					<img src="./googleSignOn.png" alt="" height="500px">
+					<aside class="notes">
+						Users can authenticate to the app with their google accounts
+					</aside>
+				</section>
+				<section>
+					<h5>Roles restrictions</h5>
+					<img src="./manager.png" alt="" height="200px">
+					<img src="./reviewer.png" alt="" height="200px">
+					<aside class="notes">
+						Different user roles restrictions, for example, possibility to perform actions 
+						like APPROVE OR REJECT for manager reviewer. That's why manager, which create order, don't see such buttons at all
+					</aside>
+				</section>
+				<section>
+					<h5>Notifications via email and FLP</h5>
+					<img src="./emailNotif.png" alt="">
+					<img src="./flpNotif.png" alt="">
+					<aside class="notes">
+						Users receive notification in FLP and via their email addresses
+					</aside>
+				</section>
+				<section>
+					<h5>PDF documents creation</h5>
+					<img src="./pdfPreview1.png" alt="" height="500px">
+					<img src="./pdfPreview2.png" alt="" height="500px">
+					<aside class="notes">
+						For WH Orders present two kinds of reports, which users can open as full WH Order summary report
+						or for each order product as packaging label with QRCode
+					</aside>
+				</section>
+				<section>
+					<h5>Mobile QRCode scanner application</h5>
+					<img src="./scanner1.PNG" alt="" height="500px">
+					<img src="./scanner2.PNG" alt="" height="500px">
+					<img src="./scanner3.PNG" alt="" height="500px">
+					<aside class="notes">
+						Additional mobile QRCode scanner application allows WH packagers scan each QRCode on
+						packaging label and trigger status changing
+					</aside>
+				</section>
+				<section>
+					<h5>Custom Elements and Visualizations</h5>
+					<img src="./tiles.png" alt="" height="500px">
+					<aside class="notes">
+						Custom tiles for related WH Orders are present at Order Object page which show some 
+						delivery statistics and navigate to separate WH Order Object page. Also progress indicator with
+						colored accents improve user experience  
+					</aside>
+				</section>
+				<section>
+					<h3>Application Idea</h3>
+				</section>
+				<section>
+					<h3>Org structure</h3>
+					<img src="./orgStructure.png" alt="Page map" height="400px">
+					<aside class="notes">
+						Lets realize some organization with several departments, in my case laboratories, warehouses
+						and suppliers department. The main idea was to automate routine operations, which do suppliers managers, from
+						placing new order to its delivery to department from warehouses. 
+					</aside>
+				</section>
+				<section>
+					<h5>Main Flow</h5>
+					<img src="./block1.svg" alt="Page map" style="width: 700px;">
+					<aside class="notes">
+						After placing new order by manager its need to be approved by reviewer. If reviewer ask for order editing,
+						manager need to do that and again receive approve. If reviewer reject the order, its automatically closes.
+						After approve by reviewer order splits to several suborders  - WH Orders.
+					</aside>
+				</section>
+				<section>
+					<h5>Main Flow</h5>
+					<img src="./block2.svg" alt="Page map" style="width: 550px;">
+					<aside class="notes">
+						Each WH Order has its own processor - WH packager, which collect products by scanning QRCodes on packaging
+						labels and when all products are collected this order is send to department. Only when all of WH Orders 
+						are delivered, the main order is completed and successfully closed.
+					</aside>
+				</section>
+				<section>
+					<h5>Entity Relationships</h5>
+					<img src="./schema.svg" alt="Entities">
+					<aside class="notes">
+						The main entity is Order, witch consists of WarehouseProducts from different Warehouses.
+						Thats why this Order splits on suborders - Wh Orders, which by contract has products from
+						only one WH. Therefore delivery takes place from WH address to Department address.
+					</aside>
+				</section>
+				<section>
+					<h5>Application Demonstration</h5>
+					<a href="https://209e88fctrial.launchpad.cfapps.us10.hana.ondemand.com/site?siteId=343d2873-b954-4b60-8e7d-204c50c5c41e#Shell-home" target="_blank">
+						<img src="./FLP.png" alt="Application" width="200px">
+					</a>
+				</section>
+				<section>
+					<h5 style="color: #427CAC;">Thanks for your attention</h5>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
